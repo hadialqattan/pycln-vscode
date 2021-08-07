@@ -1,0 +1,99 @@
+{
+  "name": "pycln",
+  "displayName": "Pycln",
+  "description": "A formatter for finding and removing unused import statements.",
+  "version": "0.0.1-alpha.0",
+  "minPyclnVersion": "0.0.5",
+  "engines": {
+    "vscode": "^1.58.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "*"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "pycln.oneFile",
+        "title": "Current File",
+        "category": "Pycln"
+      },
+      {
+        "command": "pycln.manyFiles",
+        "title": "Current Workspace",
+        "category": "Pycln"
+      }
+    ],
+    "configuration": {
+      "title": "Pycln",
+      "properties": {
+        "pycln.extension.debug": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable debugging output."
+        },
+        "pycln.extension.path": {
+          "type": "string",
+          "description": "Custom pycln path (default: pycln)."
+        },
+        "pycln.options.configPath": {
+          "type": "string",
+          "description": "Read configuration from a file."
+        },
+        "pycln.options.include": {
+          "type": "string",
+          "description": "A regular expression that matches files and\ndirectories that should be included on recursive\nsearches. An empty value means all files are included\nregardless of the name. Use forward slashes for\ndirectories on all platforms (Windows, too).\nExclusions are calculated first, inclusions later."
+        },
+        "pycln.options.exclude": {
+          "type": "string",
+          "description": "A regular expression that matches files and\ndirectories that should be exclude on recursive\nsearches. An empty value means no paths are excluded.\nUse forward slashes for directories on all platforms\n(Windows, too). Exclusions are calculated first,\ninclusions later."
+        },
+        "pycln.flags.all": {
+          "type": "boolean",
+          "default": true,
+          "description": "Remove all unused imports (not just those checked from side effects)."
+        },
+        "pycln.flags.expandStars": {
+          "type": "boolean",
+          "default": false,
+          "description": "Expand wildcard star imports. It works if only if the module is importable."
+        },
+        "pycln.flags.noGitignore": {
+          "type": "boolean",
+          "default": false,
+          "description": "Do not ignore `.gitignore` patterns. if present."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "test-compile": "tsc -p ./",
+    "test-watch": "tsc -watch -p ./",
+    "pretest": "npm run test-compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.58.0",
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.2.2",
+    "@types/node": "14.x",
+    "eslint": "^7.27.0",
+    "@typescript-eslint/eslint-plugin": "^4.26.0",
+    "@typescript-eslint/parser": "^4.26.0",
+    "glob": "^7.1.7",
+    "mocha": "^8.4.0",
+    "typescript": "^4.3.2",
+    "vscode-test": "^1.5.2",
+    "ts-loader": "^9.2.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}
